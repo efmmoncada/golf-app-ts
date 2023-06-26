@@ -33,8 +33,6 @@ function useProtectedRoute(user: object | null) {
     const inAuthGroup = segments.at(0) === "(auth)";
 
     if (!user && !inAuthGroup) {
-      console.log(segments);
-
       router.replace("/SignIn");
     } else if (user && inAuthGroup) {
       router.replace("/Home");
