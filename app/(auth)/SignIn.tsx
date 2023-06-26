@@ -1,9 +1,9 @@
-import { FC, PropsWithChildren } from "react";
+import { FC } from "react";
 import { Text, View } from "../../components/Themed";
 import { useAuth } from "../../context/Auth";
 import { Link } from "expo-router";
 
-const SignIn: FC<PropsWithChildren> = ({ children }) => {
+const SignIn: FC<void> = () => {
   const { signIn } = useAuth();
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

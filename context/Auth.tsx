@@ -10,7 +10,7 @@ import React, {
 const AuthContext = createContext<{
   signIn: () => void;
   signOut: () => void;
-  user: {} | null;
+  user: object | null;
 }>({
   signIn() {
     return;
@@ -25,7 +25,7 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 
-function useProtectedRoute(user: any) {
+function useProtectedRoute(user: object | null) {
   const segments = useSegments();
   const router = useRouter();
 
