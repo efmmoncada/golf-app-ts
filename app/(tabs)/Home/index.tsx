@@ -1,23 +1,44 @@
-import { StyleSheet } from "react-native";
-
-import EditScreenInfo from "../../../components/EditScreenInfo";
+import { StyleSheet, useColorScheme } from "react-native";
+import { Image } from "expo-image";
 import { Text, View } from "../../../components/Themed";
 import { Link } from "expo-router";
+import PageButton from "../../../components/PageButton";
+import { FontAwesome } from "@expo/vector-icons";
+import Colors from "../../../constants/Colors";
 
 export default function Home() {
+  const colorscheme = useColorScheme();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
+      <Image
+        style={styles.images}
+        contentFit="contain"
+        contentPosition="center"
+        source={require("../../../assets/images/beaverLogo.png")}
+      />
+      <Image
+        style={styles.images}
+        contentFit="contain"
+        contentPosition="center"
+        source={require("../../../assets/images/OSUBlockLetters.png")}
+      />
       <View
         style={styles.separator}
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-      <EditScreenInfo path="app/Home/index.tsx" />
       {["/Home/Drills", "/Home/Leaderboard", "/Home/Progress"].map(
         (href, i) => (
           <Link href={href} key={i} asChild>
-            <Text>{href.split("/").at(-1)}</Text>
+            <PageButton>
+              <FontAwesome
+                name="code"
+                size={25}
+                color={Colors[colorscheme ?? "light"].text}
+              />
+              <Text>{href.split("/").at(-1)}</Text>
+            </PageButton>
           </Link>
         )
       )}
@@ -30,6 +51,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    paddingVertical: 50,
   },
   title: {
     fontSize: 20,
@@ -39,5 +61,10 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: "80%",
+  },
+  images: {
+    flex: 0.8,
+    width: "40%",
+    marginVertical: -100,
   },
 });

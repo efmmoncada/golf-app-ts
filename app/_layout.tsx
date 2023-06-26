@@ -23,6 +23,7 @@ export const unstable_settings = {
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    Karma: require("../assets/fonts/Karma-Regular.ttf"),
     ...FontAwesome.font,
   });
 

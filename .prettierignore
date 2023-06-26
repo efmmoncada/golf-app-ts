@@ -2,3 +2,4 @@
 assets
 app.json
 babel.config.js
+.eslintrc.js

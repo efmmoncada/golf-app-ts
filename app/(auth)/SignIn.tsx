@@ -8,7 +8,9 @@ const SignIn: FC<void> = () => {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text onPress={() => signIn()}>Sign In</Text>
-      <Link href="SignUp">Sign Up</Link>
+      <Link href="SignUp" asChild>
+        <Text>Sign Up</Text>
+      </Link>
     </View>
   );
 };
