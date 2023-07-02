@@ -1,17 +1,42 @@
-import { StyleSheet } from "react-native";
-import EditScreenInfo from "../../../components/EditScreenInfo";
-import { Text, View } from "../../../components/Themed";
+import { FlatList, StyleSheet } from "react-native";
+import { View } from "../../../components/Themed";
+import LeaderboardListItem from "../../../components/LeaderboardListItem";
+import ScreenHeader from "../../../components/ScreenHeader";
+
+type LeaderboardInfo = {
+  name: string;
+  score: number;
+};
+
+const testData: LeaderboardInfo[] = [
+  { name: "Test", score: 12 },
+  { name: "Test", score: 12 },
+  { name: "Test", score: 12 },
+  { name: "Test", score: 12 },
+  { name: "Test", score: 12 },
+  { name: "Test", score: 12 },
+  { name: "Test", score: 12 },
+  { name: "Test", score: 12 },
+  { name: "Test", score: 12 },
+  { name: "Test", score: 12 },
+];
 
 export default function Leaderboard() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Leaderboard</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
+      <ScreenHeader
+        title="Leaderboard"
+        imageUri={require("../../../assets/images/leaderboardHeader.png")}
       />
-      <EditScreenInfo path="app/(tabs)/Home.tsx" />
+      <FlatList
+        style={styles.list}
+        showsVerticalScrollIndicator={false}
+        data={testData}
+        renderItem={({ item }) => (
+          <LeaderboardListItem name={item.name} score={item.score} />
+        )}
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
+      />
     </View>
   );
 }
@@ -22,13 +47,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  list: {
+    width: "90%",
+  },
   title: {
     fontSize: 20,
     fontWeight: "bold",
   },
   separator: {
-    marginVertical: 30,
+    marginVertical: 8,
     height: 1,
-    width: "80%",
   },
 });

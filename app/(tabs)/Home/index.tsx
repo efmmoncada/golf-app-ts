@@ -1,13 +1,29 @@
-import { StyleSheet, useColorScheme } from "react-native";
+import { StyleSheet } from "react-native";
 import { Image } from "expo-image";
-import { Text, View } from "../../../components/Themed";
+import { Text, View, useThemeColor } from "../../../components/Themed";
 import { Link } from "expo-router";
 import PageButton from "../../../components/PageButton";
-import { FontAwesome } from "@expo/vector-icons";
-import Colors from "../../../constants/Colors";
+
+const MenuOptions = [
+  {
+    href: "/Home/Drills",
+    title: "Drills",
+    icon: require("../../../assets/icons/practiceDrillsIcon.png"),
+  },
+  {
+    href: "/Home/Leaderboard",
+    title: "Leaderboard",
+    icon: require("../../../assets/icons/leaderboardIcon.png"),
+  },
+  {
+    href: "/Home/Progress",
+    title: "Progress",
+    icon: require("../../../assets/icons/progressIcon.png"),
+  },
+];
 
 export default function Home() {
-  const colorscheme = useColorScheme();
+  const color = useThemeColor({ light: "transparent", dark: "white" }, "text");
 
   return (
     <View style={styles.container}>
@@ -28,20 +44,19 @@ export default function Home() {
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-      {["/Home/Drills", "/Home/Leaderboard", "/Home/Progress"].map(
-        (href, i) => (
-          <Link href={href} key={i} asChild>
-            <PageButton>
-              <FontAwesome
-                name="code"
-                size={25}
-                color={Colors[colorscheme ?? "light"].text}
-              />
-              <Text>{href.split("/").at(-1)}</Text>
-            </PageButton>
-          </Link>
-        )
-      )}
+      {MenuOptions.map(({ href, title, icon }, i) => (
+        <Link href={href} key={i} asChild>
+          <PageButton>
+            <Image
+              style={[styles.icons, { tintColor: color }]}
+              contentFit="contain"
+              contentPosition="center"
+              source={icon}
+            />
+            <Text style={styles.buttonTitle}>{title}</Text>
+          </PageButton>
+        </Link>
+      ))}
     </View>
   );
 }
@@ -53,18 +68,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 50,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
   separator: {
     marginVertical: 30,
     height: 1,
     width: "80%",
   },
+  buttonTitle: {
+    fontSize: 25,
+  },
   images: {
     flex: 0.8,
     width: "40%",
     marginVertical: -100,
+  },
+  icons: {
+    width: 40,
+    height: 40,
+    marginHorizontal: 30,
   },
 });

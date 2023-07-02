@@ -7,10 +7,16 @@ import React, {
   useState,
 } from "react";
 
+type User = {
+  type: "coach" | "player";
+  name: string;
+  email: string;
+};
+
 const AuthContext = createContext<{
-  signIn: () => void;
+  signIn: (type: User["type"]) => void;
   signOut: () => void;
-  user: object | null;
+  user: User | null;
 }>({
   signIn() {
     return;
@@ -18,7 +24,7 @@ const AuthContext = createContext<{
   signOut() {
     return;
   },
-  user: {},
+  user: null,
 });
 
 export function useAuth() {
@@ -41,7 +47,7 @@ function useProtectedRoute(user: object | null) {
 }
 
 export const Provider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [user, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useProtectedRoute(user);
 
@@ -49,7 +55,8 @@ export const Provider: React.FC<PropsWithChildren> = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
-        signIn: () => setUser({}),
+        signIn: (type) =>
+          setUser({ name: "Test", email: "test@example.com", type: type }),
         signOut: () => setUser(null),
       }}
     >

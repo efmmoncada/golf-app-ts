@@ -20,6 +20,12 @@ const screens = [
   { name: "Profile", title: "Profile", iconName: "user-circle" as const },
   { name: "Notifications", title: "Notifications", iconName: "bell" as const },
   { name: "Settings", title: "Settings", iconName: "gear" as const },
+  {
+    name: "Drills/[id]",
+    title: "Drills",
+    iconName: "code" as const,
+    options: { href: null },
+  },
 ];
 
 export default function TabLayout() {
@@ -30,9 +36,10 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        headerShown: false,
       }}
     >
-      {screens.map(({ name, title, iconName }, i) => (
+      {screens.map(({ name, title, iconName, options }, i) => (
         <Tabs.Screen
           key={i}
           name={name}
@@ -53,6 +60,7 @@ export default function TabLayout() {
                 )}
               </Pressable>
             ),
+            ...options,
           }}
         />
       ))}

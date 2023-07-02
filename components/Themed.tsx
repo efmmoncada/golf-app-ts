@@ -43,7 +43,7 @@ export function Text(props: TextProps) {
 
   return (
     <DefaultText
-      style={[{ color, fontFamily: "SpaceMono" }, style]}
+      style={[{ color, fontFamily: "Karma" }, style]}
       {...otherProps}
     />
   );

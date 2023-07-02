@@ -1,19 +1,23 @@
 import { StyleSheet } from "react-native";
 import { Pressable, Text } from "./Themed";
+import { Link } from "expo-router";
 
 type Props = {
   name: string;
   description: string;
+  href: string;
 };
 
 export default function DrillListItem(props: Props) {
-  const { name, description } = props;
+  const { name, description, href } = props;
 
   return (
-    <Pressable style={styles.container}>
-      <Text style={styles.title}>{name}</Text>
-      <Text style={styles.desc}>{description}</Text>
-    </Pressable>
+    <Link href={href} asChild>
+      <Pressable style={styles.container}>
+        <Text style={styles.title}>{name}</Text>
+        <Text style={styles.desc}>{description}</Text>
+      </Pressable>
+    </Link>
   );
 }
 

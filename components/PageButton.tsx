@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     width: 300,
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
   },
 });

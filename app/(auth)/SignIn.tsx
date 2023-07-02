@@ -7,7 +7,8 @@ const SignIn: FC<void> = () => {
   const { signIn } = useAuth();
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text onPress={() => signIn()}>Sign In</Text>
+      <Text onPress={() => signIn("coach")}>Sign In coach</Text>
+      <Text onPress={() => signIn("player")}>Sign In player</Text>
       <Link href="SignUp" asChild>
         <Text>Sign Up</Text>
       </Link>
