@@ -9,6 +9,7 @@ import {
   View as DefaultView,
   PressableProps as DefaultPressableProps,
   Pressable as DefaultPressable,
+  TextInput as DefaultTextInput,
   ViewStyle,
 } from "react-native";
 
@@ -36,6 +37,7 @@ type ThemeProps = {
 export type TextProps = ThemeProps & DefaultText["props"];
 export type ViewProps = ThemeProps & DefaultView["props"];
 export type PressableProps = ThemeProps & DefaultPressableProps;
+export type TextInputProps = ThemeProps & DefaultTextInput["props"];
 
 export function Text(props: TextProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;
@@ -75,6 +77,28 @@ export function Pressable(props: PressableProps) {
   return (
     <DefaultPressable
       style={[{ backgroundColor, borderColor }, style as ViewStyle]}
+      {...otherProps}
+    />
+  );
+}
+
+export function TextInput(props: TextInputProps) {
+  const { style, lightColor, darkColor, ...otherProps } = props;
+
+  const backgroundColor = useThemeColor(
+    { light: lightColor, dark: darkColor },
+    "textBoxBackground"
+  );
+
+  const textColor = useThemeColor({}, "text");
+
+  return (
+    <DefaultTextInput
+      placeholderTextColor={textColor + "8"}
+      style={[
+        { backgroundColor, padding: 8, borderRadius: 8, fontSize: 16, fontFamily: "Karma" },
+        style,
+      ]}
       {...otherProps}
     />
   );

@@ -6,6 +6,8 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebaseConfig";
 
 type User = {
   type: "coach" | "player";
@@ -51,12 +53,24 @@ export const Provider: React.FC<PropsWithChildren> = ({ children }) => {
 
   useProtectedRoute(user);
 
+  onAuthStateChanged(auth, (user) => {
+    console.log("user changed");
+
+    if (user) {
+      setUser({
+        name: user.displayName ?? "Error",
+        email: user.email ?? "Error@email.com",
+        type: "coach",
+      });
+    }
+  });
+
   return (
     <AuthContext.Provider
       value={{
         user,
-        signIn: (type) =>
-          setUser({ name: "Test", email: "test@example.com", type: type }),
+        signIn: (type) => {return;},
+          // setUser({ name: "Test", email: "test@example.com", type: type }),
         signOut: () => setUser(null),
       }}
     >

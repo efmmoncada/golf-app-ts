@@ -6,17 +6,17 @@ import { useThemeColor } from "./Themed";
 type Props = {
   containerStyle?: ViewStyle;
   items: { label: string; value: string }[];
-  initialValue: string;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export default function SelectorButton(props: Props) {
-  const { items, initialValue, containerStyle } = props;
+  const { items, value, setValue, containerStyle } = props;
 
   const backgroundColor = useThemeColor({}, "buttonBackground");
   const textColor = useThemeColor({}, "text");
 
   const [open, setOpen] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState(initialValue);
   const [pickerItems, setPickerItems] = useState(items);
 
   return (
@@ -24,8 +24,8 @@ export default function SelectorButton(props: Props) {
       autoScroll
       open={open}
       setOpen={setOpen}
-      value={selectedFilter}
-      setValue={setSelectedFilter}
+      value={value}
+      setValue={setValue}
       items={pickerItems}
       setItems={setPickerItems}
       style={{ backgroundColor }}
